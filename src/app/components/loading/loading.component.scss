@@ -1,0 +1,19 @@
+main {
+    width: 100vw;
+    height: 60vh;
+    margin: 0;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+  
+  div {
+    width: 8vmax;
+    height: 8vmax;
+    border-right: 4px solid #000000;
+    border-radius: 100%;
+    animation: spinRight 800ms linear infinite;
+    
+  }

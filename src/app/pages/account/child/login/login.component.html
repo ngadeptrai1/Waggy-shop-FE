@@ -1,0 +1,59 @@
+<div class="col-lg-8 offset-lg-2 mt-5">
+
+    <p class="mb-0">Log-In With Social</p>
+    <hr class="my-1">
+    <div class="row mt-4 mb-5">
+        <div class="d-grid col-md-6 my-2">
+            <a  [routerLink]="['/']" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1 ">
+                <div class="d-flex flex-wrap justify-content-center">
+                    <iconify-icon icon="ion:logo-google" class="signup-social-icon me-2"></iconify-icon>
+                    <p class="mb-0">Google</p>
+                </div>
+            </a>
+        </div>
+        <div class="d-grid col-md-6 my-2">
+            <a  [routerLink]="['/']" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1 ">
+                <div class="d-flex flex-wrap justify-content-center">
+                    <iconify-icon icon="ion:logo-facebook" class="signup-social-icon me-2"></iconify-icon>
+                    <p class="mb-0">Facebook</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+    <p class="mb-0">Or Log-In With An Existing Account</p>
+    <hr class="my-1">
+
+    <form id="form1" [formGroup]="form_si"(submit)="onSubmitLogin()" class="form-group flex-wrap ">
+        <div class="form-input col-lg-12 my-4">
+
+            <input type="text" id="exampleInputEmail1" formControlName="account_name" placeholder="Enter account name" class="form-control mb-3 p-4">
+            @if (form_si.controls.account_name.invalid &&
+                 (form_si.controls.account_name.touched || form_si.controls.account_name.dirty)) {
+                  <span class="text-bg-danger">Account name is invalid</span>
+                 }
+            <input type="password" id="inputPassword1" formControlName="password" placeholder="Enter password" class="form-control mb-3 p-4" aria-describedby="passwordHelpBlock">
+            @if (form_si.controls.password.invalid &&
+            (form_si.controls.password.touched || form_si.controls.password.dirty)) {
+             <span class="text-bg-danger">Pass name is invalid</span>
+            }
+            <label class="py-3 d-flex flex-wrap justify-content-between">
+                <div>
+                    <input type="checkbox" required="" class="d-inline">
+                    <span class="label-body ">Remember Me</span>
+                </div>
+
+                <div id="passwordHelpBlock" class="form-text ">
+                    <a  [routerLink]="['/']" class="text-primary  fw-bold"> Forgot Password?</a>
+                </div>
+            </label>
+            <div class="d-grid my-3">
+                <button class="btn btn-dark btn-lg rounded-1">Log In</button>
+            </div>
+
+        </div>
+    </form>
+
+</div>
+<app-modal *ngIf="modalVisible" [modalVisible]="modalVisible" [modalMessage]="modalMessage"  (closeModal)="onModalClose()"></app-modal>

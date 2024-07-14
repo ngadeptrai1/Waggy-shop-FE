@@ -1,0 +1,36 @@
+<div>
+    <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
+      New
+    </div> -->
+    <div class="card position-relative">
+        
+      <a [routerLink]="['/detail', product.id]" class="m">
+        <img src="{{product.thumbnail}}" class=" img-thumbnail rounded-4" style="height:18em; "alt="image" loading="lazy">
+    </a>
+      <div class="card-body p-0">
+        <a [routerLink]="['/detail', product.id]">
+          <h3 class="card-title pt-4 m-0 text-truncate" data-bs-max-length="20">{{product.name}}</h3> 
+        </a>
+        <div class="card-text">
+          <span class="rating secondary-font">
+            <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+            <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+            <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+            <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+            <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+            5.0</span>
+
+          <h3 class="secondary-font text-primary">{{product.sale_price}}$</h3>
+          <!-- cart btn -->
+          <div class="d-flex flex-wrap mt-3">
+            <app-cart-button  [quantity]="1" [productId]="product.id+''"></app-cart-button>
+            <!-- like -->
+            <app-with-list-button [productId]="product.id+''"></app-with-list-button>
+            
+          </div>
+        
+        </div>
+
+      </div>
+    </div>
+  </div>

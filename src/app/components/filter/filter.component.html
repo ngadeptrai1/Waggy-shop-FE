@@ -1,0 +1,54 @@
+
+    <div class="sidebar">
+      <div class="widget-menu">
+        <div class="widget-search-bar">
+          <div class="search-bar border rounded-2 border-dark-subtle pe-3">
+            <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
+
+              <input type="text" (input)="filteringProductName($event)" class="form-control border-0 bg-transparent" placeholder="Search for products">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z"></path>
+              </svg>
+            </form>
+
+          </div>
+        </div>
+      </div>
+      <div class="widget-product-categories pt-5">
+        <h4 class="widget-title">Categories</h4>
+        <ul class="product-categories sidebar-list list-unstyled">
+          <li class="tags-item" *ngFor="let cate of categories">
+            <p  style="cursor:pointer" (click)="selectCategory(cate.name)" class="nav-link {{cate.name === currentCate ? 'text-bg-warning':''}} " >{{cate.name}}</p>
+          </li>
+        </ul>
+      </div>
+      <div class="widget-product-brands pt-3">
+        <h4 class="widget-title">Brands</h4>
+        <ul class="product-tags sidebar-list list-unstyled">
+            <!--  text-bg-warning -->
+          <li  class="tags-item" *ngFor="let brand of brands">
+            <p  style="cursor:pointer" (click)="selectBrand(brand.name)" class="nav-link {{brand.name === currentBrand ? 'text-bg-warning':''}} ">{{brand.name}}</p>
+          </li>
+        </ul>
+      </div>
+      <div class="widget-price-filter pt-3">
+        <h4 class="widget-titlewidget-title">Filter By Price</h4>
+        <ul class="product-tags sidebar-list list-unstyled">
+          <li  style="cursor:pointer" class="tags-item {{ currentMaxPrice == 30 ? 'text-bg-warning':'' }}">
+            <p  (click)="selectPrice(0,30)"   class="nav-link">Less than $30</p>
+          </li>
+          <li  style="cursor:pointer" class="tags-item {{ currentMaxPrice == 50 ? 'text-bg-warning':'' }} ">
+            <p (click)="selectPrice(30,50)" class="nav-link">$30- $50</p>
+          </li>
+          <li  style="cursor:pointer" class="tags-item {{ currentMaxPrice == 80 ? 'text-bg-warning':'' }}">
+            <p (click)="selectPrice(50,80)" class="nav-link">$50- $80</p>
+          </li>
+          <li  style="cursor:pointer" class="tags-item {{ currentMaxPrice == 100 ? 'text-bg-warning':'' }}">
+            <p (click)="selectPrice(80,100)" class="nav-link">$80- $100</p>
+          </li>
+          <li  style="cursor:pointer" class="tags-item {{ currentMaxPrice == 1000 ? 'text-bg-warning':'' }}">
+            <p (click)="selectPrice(100,1000)" class="nav-link">Greater than $100</p>
+          </li>
+        </ul>
+      </div>
+    </div>

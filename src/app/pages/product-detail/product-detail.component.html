@@ -1,0 +1,157 @@
+<section id="banner" class="py-3" style="background: #F9F3EC;">
+    <div class="container">
+      <div class="hero-content py-5 my-3">
+        <h2 class="display-1 mt-3 mb-0">Single <span class="text-primary">Product</span></h2>
+        <nav class="breadcrumb">
+          <a class="breadcrumb-item nav-link"  [routerLink]="['/']">Home</a>
+          <span class="breadcrumb-item active" aria-current="page">Single-Product</span>
+        </nav>
+      </div>
+    </div>
+  </section>
+@if (isLoadding) {
+  <div class="container my-4 p-5 align-items-lg-center">
+    <img src="assets/images/chocolat/loader.gif" class="img-fluid"/>
+  </div>
+}@else {
+   <section id="selling-product">
+    <div class="container my-md-5 py-5">
+      <div class="row g-md-5">
+        <div class="col-lg-6">
+          <div class="row">
+            <div class="col-md-12">
+              <!-- product-large-slider -->
+              <div class="swiper product-large-slider swiper-fade swiper-initialized swiper-horizontal swiper-watch-progress swiper-backface-hidden">
+                <div class="swiper-wrapper" id="swiper-wrapper-04b54d6cd5af786a" aria-live="polite">
+                  <div class="swiper-slide swiper-slide-visible swiper-slide-active" role="group" aria-label="1 / 4" style="width: 624px; opacity: 1; transform: translate3d(0px, 0px, 0px);">
+                    <img src="{{product.thumbnail}}" class="img-fluid">
+                  </div>
+
+                  <!-- <div class="swiper-slide swiper-slide-next" role="group" aria-label="{{i+'/' + product.product_images.length}}" 
+                   *ngFor="let productImage of product.product_images ; let i = index" >
+                      <img src="{{productImage.name}}" class="img-fluid">
+                  </div> -->
+
+                  <!-- <div class="swiper-slide" role="group" aria-label="3 / 4" style="width: 624px; opacity: 0; transform: translate3d(-1248px, 0px, 0px);">
+                    <img src="images/blog-lg3.jpg" class="img-fluid">
+                  </div>
+                  <div class="swiper-slide" role="group" aria-label="4 / 4" >
+                    <img src="images/blog-lg1.jpg" class="img-fluid">
+                  </div> -->
+
+                </div>
+              <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+            </div>
+            <div class="col-md-12 mt-2">
+              <!-- product-thumbnail-slider -->
+              <div thumbsslider="" class="swiper product-thumbnail-slider swiper-initialized swiper-horizontal swiper-free-mode swiper-watch-progress swiper-backface-hidden swiper-thumbs">
+                <div class="swiper-wrapper" id="swiper-wrapper-3489b12496bdddf2" aria-live="polite" style="transform: translate3d(0px, 0px, 0px);">
+                  <!-- <div class="swiper-slide swiper-slide-visible swiper-slide-active swiper-slide-thumb-active" role="group" aria-label="1 / 4" style="width: 202.667px; margin-right: 8px;">
+                    <img src="{{product.thumbnail}}" class="img-fluid">
+                  </div> -->
+
+                  <div class="swiper-slide swiper-slide-visible swiper-slide-next" style="width: 202.667px; margin-right: 8px;" role="group" 
+                  aria-label="{{i+'/' + product.product_images.length}}"
+                   *ngFor="let productImage of product.product_images ; let i = index">
+                      <img src="{{productImage.name}}" class="img-fluid">
+                  </div>
+
+                  <!-- <div class="swiper-slide swiper-slide-visible " role="group" aria-label="2 / 4" >
+                    <img src="images/item4.jpg" class="img-fluid">
+                  </div>
+                  <div class="swiper-slide swiper-slide-visible" role="group" aria-label="3 / 4" style="width: 202.667px; margin-right: 8px;">
+                    <img src="images/item7.jpg" class="img-fluid">
+                  </div>
+                  <div class="swiper-slide" role="group" aria-label="4 / 4" style="width: 202.667px; margin-right: 8px;">
+                    <img src="images/item1.jpg" class="img-fluid">
+                  </div> -->
+
+                </div>
+              <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+            </div>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="col-lg-6 mt-5 ">
+          <div class="product-info">
+            <div class="element-header">
+              <h2 itemprop="name" class="display-6">{{product.name}}</h2>
+              <div class="rating-container d-flex gap-0 align-items-center">
+                <span class="rating secondary-font">
+                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                  5.0</span>
+              </div>
+            </div>
+            <div class="product-price pt-3 pb-3">
+              <strong class="text-primary display-6 fw-bold">${{product.sale_price}}</strong><del class="ms-2">${{product.origin_price}}</del>
+            </div>
+            <p>{{product.description}}</p>
+            <div class="cart-wrap">
+              <div class="product-quantity pt-2">
+                <div class="stock-number text-dark"><em>{{product.quantity}} in stock</em></div>
+                <div class="stock-button-wrap">
+
+                  <div class="input-group product-qty align-items-center w-25">
+                    <span class="input-group-btn">
+                      <button type="button"  (click)="minus()" class="quantity-left-minus btn btn-light btn-number" data-type="minus">
+                        <iconify-icon icon="fluent-emoji-high-contrast:minus"></iconify-icon>
+                      </button>
+                    </span>
+                    <strong class=" text-center p-2 mx-1" >{{quantity}} </strong>
+                    <span class="input-group-btn">
+                      <button type="button" (click)="plus()" class="quantity-right-plus btn btn-light btn-number" data-type="plus" data-field="">
+                        <iconify-icon icon="mingcute:plus-fill"></iconify-icon>
+                      </button>
+                    </span>
+                  </div>
+<!-- cart btn -->
+                 <app-cart-button [quantity]="quantity" [productId]="product.id+''"></app-cart-button>
+
+                </div>
+              </div>
+            </div>
+            <div class="meta-product pt-4">
+              <div class="meta-item d-flex align-items-baseline">
+                <h6 class="item-title fw-bold no-margin pe-2">SKU:</h6>
+                <ul class="select-list list-unstyled d-flex">
+                  <li data-value="S" class="select-item">2391212098398123</li>
+                </ul>
+              </div>
+              
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="product-info-tabs py-md-5">
+    <div class="container">
+      <div class="row">
+        <div class="d-flex flex-column flex-md-row align-items-start gap-5">
+          <div class="nav flex-row flex-wrap flex-md-column nav-pills me-3 col-lg-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <button class="nav-link fs-5 mb-2 text-start active" id="v-pills-description-tab" data-bs-toggle="pill" data-bs-target="#v-pills-description" type="button" role="tab" aria-controls="v-pills-description" aria-selected="true" tabindex="-1">Description</button>
+          
+          </div>
+          <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade active show" id="v-pills-description" role="tabpanel" aria-labelledby="v-pills-description-tab" tabindex="0">
+              <h2>Product Description</h2>
+              <p>{{product.description}}</p>
+             
+             
+            </div>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+}
+ 

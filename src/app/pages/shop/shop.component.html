@@ -1,0 +1,74 @@
+
+
+<section id="banner" class="py-3" style="background: #F9F3EC;">
+    <div class="container">
+      <div class="hero-content py-5 my-3">
+        <h2 class="display-1 mt-3 mb-0">Shop</h2>
+        <nav class="breadcrumb">
+          <a class="breadcrumb-item nav-link"[routerLink]="['/']">Home</a>
+          <span class="breadcrumb-item active" aria-current="page">Shop</span>
+        </nav>
+      </div>
+    </div>
+  </section>
+  
+  <div class="shopify-grid">
+    <div class="container py-5 my-5">
+      <div class="row flex-md-row-reverse g-md-5 mb-5">
+
+        <main class="col-md-9">
+         
+          
+          @if(isLoading){
+            <mat-spinner></mat-spinner>
+            
+        }@else{
+
+              <div class="filter-shop d-md-flex justify-content-between align-items-center">
+            <div class="showing-product">
+              <p class="m-0">Showing {{products.content.length +" of " + products.totalElements}} results</p>
+            </div>
+            <!-- sort by -->
+             <app-sort class="sort-by" (sortChanged)="changedSort($event)"></app-sort>
+           <!-- end-sort -->
+
+          </div>
+
+            @if (products.content.length>0) {
+             
+                  <div class="product-grid row element">
+                     @for (item of products.content; track $index) {
+              <app-product  class="col-md-4 my-4 flex-fill" [product]="item"></app-product>
+           
+              }
+           </div>
+            <!-- / product-grid -->
+  
+           <!-- pagination -->
+         <app-pagination [curentPage]="products.number" [totalPages]="products.totalPages" (pageChanged)="changedPage($event)"></app-pagination>
+          }
+          @else {
+            <h3>No product found </h3>
+          }
+
+        }
+         
+</main>
+        <!-- fillter -->
+        <aside class="col-md-3 mt-5">
+             <app-filter
+              [currentBrand]="brand"
+              [currentCate]="category"
+              [currentMaxPrice]="maxPrice"
+              [currentMinPrice]="minPrice"
+              (selectedBrand)="changedBrand($event)"
+              (selectedCategory)="changedCategory($event)"
+              (priceChanged)="changePrice($event)"
+              (nameFilling)="changeName($event)"
+              ></app-filter>
+        </aside>
+   
+        <!-- end filletr -->
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,27 @@
+    <nav class="navigation paging-navigation text-center mt-5" role="navigation">
+        <div class="pagination loop-pagination d-flex justify-content-center align-items-center">
+            @if (curentPage>0) {
+            <a href="javascript:void(0)" class="pagination-arrow d-flex align-items-center mx-3" (click)="changePage(0)">
+            <iconify-icon icon="material-symbols:first-page-rounded"  class="pagination-arrow fs-1"></iconify-icon>
+        </a>
+            }
+        @if(curentPage-1>=0){
+            <a href="javascript:void(0)" class="page-numbers mt-2 fs-3 mx-3" (click)="changePage(curentPage-1)">{{curentPage-1}}</a>  
+        }
+        <a href="javascript:void(0)" aria-current="page" class="page-numbers mt-2 fs-3 mx-3 current" href="javascript:void(0)">{{curentPage}}</a>
+        
+        @if(curentPage+1 < totalPages-1){
+            <a href="javascript:void(0)" class="page-numbers mt-2 fs-3 mx-3" (click)="changePage(curentPage+1)">{{curentPage+1}}</a>  
+        }
+        @if(curentPage+2< totalPages-2){
+            <a href="javascript:void(0)" class="page-numbers mt-2 fs-3 mx-3" (click)="changePage(curentPage+2)">{{curentPage+2}}</a>  
+        }
+        @if(curentPage < totalPages-1){
+
+            <a  href="javascript:void(0)" class="pagination-arrow d-flex align-items-center mx-3" (click)="changePage(totalPages-1)">
+            <!-- <iconify-icon icon="ic:baseline-keyboard-arrow-right" class="pagination-arrow fs-1"></iconify-icon> -->
+            <iconify-icon icon="material-symbols:last-page-rounded"  class="pagination-arrow fs-1"></iconify-icon>
+                </a>
+        }
+        </div>
+    </nav>

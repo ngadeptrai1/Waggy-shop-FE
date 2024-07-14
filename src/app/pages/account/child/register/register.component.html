@@ -1,0 +1,60 @@
+<div class="">
+     <form  id="form2" [formGroup]="form_Re" (submit) ="onSubmitRegister()" class="form-group flex-wrap ">
+           
+          <div class="form-input col-lg-12 my-4">
+                <input type="text"  formControlName="full_name" 
+                 placeholder="Your full name" class="form-control mb-3 p-4 " >
+                 @if (form_Re.controls.full_name.invalid &&
+                 (form_Re.controls.full_name.touched || form_Re.controls.full_name.dirty)) {
+                  <span class="text-bg-danger">Full name is invalid</span>
+                 }
+                <input type="text"  
+                formControlName="email" placeholder="Your email address" class="form-control mb-3 p-4 " >
+                @if (form_Re.controls.email.invalid &&
+                 (form_Re.controls.email.touched || form_Re.controls.email.dirty)||
+                 form_Re.controls.email.errors?.['email']
+                 ) {
+                  <span class="text-bg-danger">Email is invalid</span>
+                 }
+                <input type="text"  
+                formControlName="account_name" placeholder="Your account name" class="form-control mb-3 p-4" >
+                @if (form_Re.controls.account_name.invalid &&
+                 (form_Re.controls.account_name.touched || form_Re.controls.account_name.dirty)) {
+                  <span class="text-bg-danger">Account name is invalid</span>
+                 }
+                <input type="password" formControlName="password" 
+                placeholder="Set your password" class="form-control mb-3 p-4" aria-describedby="passwordHelpBlock" >
+                @if (form_Re.controls.password.invalid &&
+                 (form_Re.controls.password.touched || form_Re.controls.password.dirty)) {
+                  <span class="text-bg-danger">Pass name is invalid</span>
+                 }
+                <input type="Password" formControlName="rePassword" 
+                placeholder="Retype your password" class="form-control mb-3 p-4" aria-describedby="passwordHelpBlock" >
+                @if (form_Re.controls.rePassword.invalid &&
+                (form_Re.controls.rePassword.touched || form_Re.controls.rePassword.dirty)
+                
+                ) {
+                 <span class="text-bg-danger">Password is invalid</span>
+                }
+                @if (form_Re.controls.password.value != form_Re.controls.rePassword.value ) {
+                  <span class="text-bg-danger"> Password not same</span>
+                 }
+          
+                <label class="py-3 d-flex flex-wrap justify-content-between">
+                    <div>
+                        <input type="checkbox" required="" class="d-inline">
+                        <span class="label-body ">Remember Me</span>
+                    </div>
+
+                    <div id="passwordHelpBlock" class="form-text ">
+                        <a  [routerLink]="['/']" class="text-primary  fw-bold"> Forgot Password?</a>
+                    </div>
+                </label>
+                <div class="d-grid my-3">
+                    <button type="submit" class="btn btn-dark btn-lg rounded-1" [disabled]="form_Re.invalid">Sign Up</button>
+                </div>
+<!-- [disabled]="form_Re.invalid" -->
+            </div>
+        </form>
+        <app-modal *ngIf="modalVisible" [modalVisible]="modalVisible" [modalMessage]="modalMessage"  (closeModal)="onModalClose()"></app-modal>
+</div>
