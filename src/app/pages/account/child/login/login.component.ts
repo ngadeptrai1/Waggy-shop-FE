@@ -49,7 +49,7 @@ export class LoginComponent {
      this.authService.login( this.form_si.value as LoginPayload).subscribe({
          next:(res)=>{
            this.matSnackBar.open("Loggin Successfuly","",{duration:3000});
-                  this.router.navigate(['']);
+           location.replace("/")
          },
          error:(err)=>{     
           this.matSnackBar.open(err.error.message)

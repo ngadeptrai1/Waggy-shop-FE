@@ -29,19 +29,21 @@ export class HeaderComponent implements OnInit {
   }
   constructor(private cartService:CartService,
     private router: Router,
-    private authService:AuthService
+    private authService:AuthService,
+ 
   ){
       document.addEventListener('click', () => this.closeDropdown());
     this.cartService = cartService;
+    this.isLoggin = this.authService.isLoggedIn();
   }
   ngOnInit(): void {
      this.cartService.getCartObservable().subscribe(cartSubject=>{
         this.quantity = Object.keys(cartSubject).length ;
     })
-   this.isLoggin = this.authService.isLoggedIn();
+  
   }
   logout():void{
       this.authService.logout();
-      this.router.navigate(['/account']);
+      location.replace("/");
   }
 }

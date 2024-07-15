@@ -7,8 +7,8 @@ import { Options } from '../../type';
   providedIn: 'root'
 })
 export class ApiService {
-  
-  defaultUrl : string = "https://authen-hkxg.onrender.com/api/v1/";
+  // http://localhost:8080/api/v1/products?brand=Becosi
+  defaultUrl : string = "http://localhost:8080/api/v1/";
   constructor(
     private httpClient : HttpClient
   ) { }
