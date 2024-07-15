@@ -3,7 +3,7 @@ import { ModalComponent } from '../../../modal/modal.component';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../../services/auth.service';
 import { LoginPayload } from '../../../../../type';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LocalStorage } from '../../../../constans/constants';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
@@ -18,7 +18,7 @@ import {MatInputModule} from '@angular/material/input';
   imports: [ReactiveFormsModule,ModalComponent
     ,CommonModule
     ,MatSnackBarModule,
-    MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule],
+    MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule,RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]

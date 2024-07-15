@@ -7,11 +7,12 @@ import { ModalComponent } from '../../../modal/modal.component';
 import { AuthService } from '../../../../services/auth.service';
 import { RegisterPayload } from '../../../../../type';
 import { LocalStorage } from '../../../../constans/constants';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule,ModalComponent],
+  imports: [ReactiveFormsModule,CommonModule,ModalComponent,RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]

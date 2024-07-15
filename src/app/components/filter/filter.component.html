@@ -18,7 +18,7 @@
         <h4 class="widget-title">Categories</h4>
         <ul class="product-categories sidebar-list list-unstyled">
           <li class="tags-item" *ngFor="let cate of categories">
-            <p  style="cursor:pointer" (click)="selectCategory(cate.name)" class="nav-link {{cate.name === currentCate ? 'text-bg-warning':''}} " >{{cate.name}}</p>
+            <p  style="cursor:pointer" (click)="selectCategory(cate.name)" class="nav-link {{cate.name === currentCate ? 'text-bg-warning selected':''}} " >{{cate.name}}</p>
           </li>
         </ul>
       </div>
@@ -27,14 +27,14 @@
         <ul class="product-tags sidebar-list list-unstyled">
             <!--  text-bg-warning -->
           <li  class="tags-item" *ngFor="let brand of brands">
-            <p  style="cursor:pointer" (click)="selectBrand(brand.name)" class="nav-link {{brand.name === currentBrand ? 'text-bg-warning':''}} ">{{brand.name}}</p>
+            <p  style="cursor:pointer" (click)="selectBrand(brand.name)" class="nav-link {{brand.name === currentBrand ? 'text-bg-warning selected':''}} ">{{brand.name}}</p>
           </li>
         </ul>
       </div>
       <div class="widget-price-filter pt-3">
         <h4 class="widget-titlewidget-title">Filter By Price</h4>
         <ul class="product-tags sidebar-list list-unstyled">
-          <li  style="cursor:pointer" class="tags-item {{ currentMaxPrice == 30 ? 'text-bg-warning':'' }}">
+          <li  style="cursor:pointer" class="tags-item {{ currentMaxPrice == 30 ? 'text-bg-warning ':'' }}">
             <p  (click)="selectPrice(0,30)"   class="nav-link">Less than $30</p>
           </li>
           <li  style="cursor:pointer" class="tags-item {{ currentMaxPrice == 50 ? 'text-bg-warning':'' }} ">

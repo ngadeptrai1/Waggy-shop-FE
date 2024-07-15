@@ -17,22 +17,20 @@
       <div class="row flex-md-row-reverse g-md-5 mb-5">
 
         <main class="col-md-9">
-         
+          <div class="filter-shop d-md-flex justify-content-between align-items-center">
+            <div class=""></div>
+            <!-- sort by -->
+             <app-sort class="sort-by" (sortChanged)="changedSort($event)"></app-sort>
+           <!-- end-sort -->
+
+          </div>
           
           @if(isLoading){
             <mat-spinner></mat-spinner>
             
         }@else{
 
-              <div class="filter-shop d-md-flex justify-content-between align-items-center">
-            <div class="showing-product">
-              <p class="m-0">Showing {{products.content.length +" of " + products.totalElements}} results</p>
-            </div>
-            <!-- sort by -->
-             <app-sort class="sort-by" (sortChanged)="changedSort($event)"></app-sort>
-           <!-- end-sort -->
-
-          </div>
+             
 
             @if (products.content.length>0) {
              
@@ -43,7 +41,9 @@
               }
            </div>
             <!-- / product-grid -->
-  
+            <div class="showing-product">
+              <p class="m-0">Showing {{products.content.length +" of " + products.totalElements}} results</p>
+            </div>
            <!-- pagination -->
          <app-pagination [curentPage]="products.number" [totalPages]="products.totalPages" (pageChanged)="changedPage($event)"></app-pagination>
           }
