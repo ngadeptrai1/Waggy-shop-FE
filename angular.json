@@ -37,7 +37,8 @@
               "src/styles.scss",
               "src/style/style.css",
               "src/style/css/vendor.css",
-              "src/style/css/normalize.css"
+              "src/style/css/normalize.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css"
             ],
             "scripts": [
               "src/style/js/jquery-1.11.0.min.js",
