@@ -1,4 +1,12 @@
-<div class="col-lg-8 offset-lg-2 mt-5">
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<div class="col-lg-8 offset-lg-2 mt-5 " [disabled]="isLoading">
 
     <p class="mb-0">Log-In With Social</p>
     <hr class="my-1">
@@ -49,11 +57,11 @@
                 </div>
             </label>
             <div class="d-grid my-3">
-                <button class="btn btn-dark btn-lg rounded-1">Log In</button>
+                <button class="btn btn-dark btn-lg rounded-1" [disabled]="isLoading">Log In</button>
             </div>
 
         </div>
     </form>
 
 </div>
-<app-modal *ngIf="modalVisible" [modalVisible]="modalVisible" [modalMessage]="modalMessage"  (closeModal)="onModalClose()"></app-modal>
+<!-- <app-modal *ngIf="modalVisible" [modalVisible]="modalVisible" [modalMessage]="modalMessage"  (closeModal)="onModalClose()"></app-modal> -->

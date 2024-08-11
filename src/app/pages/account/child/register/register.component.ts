@@ -44,18 +44,15 @@ export class RegisterComponent {
     localStorage.removeItem(LocalStorage.token);
       this.authService.register( this.form_Re.value as RegisterPayload).subscribe({
           next:(res)=>{
-                    console.log(res);
                     this.modalVisible = true;
                     this.modalMessage = res.message+"";
           },
           error:(err)=>{
             this.modalVisible = true;
-             this.modalMessage = err.error;
+            this.modalMessage = err.error;
           },
           complete:()=>{
-          
               console.log("ok");
-              
           }
         }
       );

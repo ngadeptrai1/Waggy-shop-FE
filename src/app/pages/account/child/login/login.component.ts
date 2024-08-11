@@ -12,13 +12,15 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
-@Component({
+import {NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
+ @Component({
   selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule,ModalComponent
     ,CommonModule
     ,MatSnackBarModule,
-    MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule,RouterLink],
+    MatFormFieldModule, MatInputModule, MatButtonModule,
+     MatIconModule,RouterLink,NgxSpinnerModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
@@ -30,6 +32,8 @@ export class LoginComponent {
   authService = inject(AuthService);
   router = inject(Router)
   matSnackBar = inject(MatSnackBar);
+  isLoading :boolean = false;
+  spinner = inject(NgxSpinnerService );
 
   form_si = this.si_form.group({
     account_name: ['',[Validators.required,Validators.maxLength(12),Validators.minLength(6)]],
@@ -43,11 +47,17 @@ export class LoginComponent {
   onSubmitLogin(){
     if(this.form_si.invalid){
       this.form_si.markAllAsTouched();
-      return
+      return;
    }
+   this.isLoading = true;
+    this.showSpin();
    localStorage.removeItem(LocalStorage.token);
      this.authService.login( this.form_si.value as LoginPayload).subscribe({
          next:(res)=>{
+          setTimeout(()=>{
+           this.isLoading = false;
+          },5000)
+
            this.matSnackBar.open("Loggin Successfuly","",{duration:3000});
            location.replace("/")
          },
@@ -62,5 +72,12 @@ export class LoginComponent {
        }
      );
   }
-  
+  private showSpin():void{
+    if(this.isLoading){
+      this.spinner.show();
+    }
+    else{
+      this.spinner.hide()
+    }
+  }
 }
