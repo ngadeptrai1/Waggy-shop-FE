@@ -11,6 +11,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyOrdersComponent } from './pages/my-orders/my-orders.component';
 import { AuthService } from './services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -30,7 +32,8 @@ import { AuthService } from './services/auth.service';
   providers:[
     MatSnackBarModule,
     BrowserAnimationsModule,
-    AuthService
+    AuthService,
+    CookieService
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -40,6 +43,7 @@ export class AppComponent implements OnInit {
   authService = inject(AuthService);
   title = 'my-angular-app';
 ngOnInit(): void {
+  console.log(this.authService.getToken()+"token");
     if(!this.authService.isLoggedIn()){
       this.authService.logout();
     }

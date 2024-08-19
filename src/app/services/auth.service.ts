@@ -4,6 +4,7 @@ import { ApiResponse, LoginPayload, RegisterPayload, UserInterface } from '../..
 import { map } from 'rxjs';
 import { LocalStorage } from '../constans/constants';
 import { jwtDecode } from 'jwt-decode';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class AuthService {
 
   registerUrl :string = "auth/register";
   loginUrl :string = "auth/authenticate";
+  cookie = inject(CookieService);
   constructor(private service: ApiService) { }
 
   register(payload : RegisterPayload){
@@ -22,13 +24,15 @@ export class AuthService {
     return this.service.post<ApiResponse<UserInterface>>(this.loginUrl,payload)
     .pipe(map((response)=>{
       if(response.token){
-        localStorage.setItem(LocalStorage.token,response.token);
+        this.cookie.set("123",response.token);
+        // localStorage.setItem(LocalStorage.token,response.token);
       }
      return  response;
     }))
    }
    getToken(): string | null {
-    return localStorage.getItem(LocalStorage.token);
+    console.log(this.cookie.get("123"));
+    return this.cookie.get("123");
     
   }
 
@@ -54,20 +58,9 @@ export class AuthService {
     const expirationDate = new Date(decodedToken.exp * 1000);
     return expirationDate > new Date();
   }
-  
-  getJwtToken(): string | null {
-    const cookies = document.cookie.split(';');
-    for (const cookie of cookies) {
-      const [name, value] = cookie.split('=');
-      if (name.trim() === 'JWT_TOKEN') {
-        return decodeURIComponent(value);
-      }
-    }
-    return null;
-  }
 
   logout(): void {
-    localStorage.removeItem(LocalStorage.token);
+    this.cookie.delete("123");
   }
 
 }
