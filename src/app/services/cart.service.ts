@@ -8,14 +8,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root'
 })
 export class CartService {
-   snackBar= inject(MatSnackBar)
+  snackBar = inject(MatSnackBar);
+  private cart: { [key: string]: number } = {};
+  private cartSubject: BehaviorSubject<{ [key: string]: number }> = new BehaviorSubject(this.getCart());
 
-  private cartSubject:BehaviorSubject<{[key:string]:number}> = new BehaviorSubject(this.getCart());
-  constructor() { }
+  constructor() {}
 
   getCart(): { [key: string]: number } {
     const cart = localStorage.getItem(LocalStorage.cart);
-    return cart ? JSON.parse(cart):{};
+    return cart ? JSON.parse(cart) : {};
   }
 
   getCartObservable() {
@@ -27,41 +28,34 @@ export class CartService {
     this.cartSubject.next(cart);
   }
 
-  addToCart(productId:string,quantity:number):void{
+  addToCart(productId: string, quantity: number): void {
     const cart = this.getCart();
 
-    if(cart[productId]){
-      cart[productId] +=quantity;
-    }else{
+    if (cart[productId]) {
+      cart[productId] += quantity;
+    } else {
       cart[productId] = quantity;
     }
-    console.log("hehe");
-    
-    this.snackBar.open("The product has been successfully added to the cart ",'',{duration:1000})
+
+    this.snackBar.open("The product has been successfully added to the cart", '', { duration: 1000 });
     this.updateCartSubject(cart);
   }
 
-  updateCart(productId:string,quantity:number):void{
+  updateCart(productId: string, quantity: number): void {
     const cart = this.getCart();
-    if(cart[productId]){
-      cart[productId] = quantity;
-    }else{
-      cart[productId] = quantity;
-    }
+    cart[productId] = quantity;
     this.updateCartSubject(cart);
   }
+
   removeFromCart(productId: string): void {
     const cart = this.getCart();
     delete cart[productId];
-    this.updateCartSubject(cart); 
-  
+    this.updateCartSubject(cart);
   }
 
-  clearCart(){
+  clearCart() {
     const cart = {};
     this.updateCartSubject(cart);
     localStorage.removeItem(LocalStorage.cart);
   }
-
-  
 }

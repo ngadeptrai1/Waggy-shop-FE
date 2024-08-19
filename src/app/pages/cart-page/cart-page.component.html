@@ -64,7 +64,7 @@
                   </div> -->
                   <div class="product-qty align-items-center w-50 d-flex ">
                     <span class="input-group-btn">
-                      <button type="button" (click)="minus(item.quantity,item.product.id+'')"
+                      <button type="button" (click)="changeQuantity(item.quantity-1,item.product.id+'')"
                        class="quantity-left-minus btn btn-light btn-number" data-type="minus"
                        [disabled]="item.quantity<=1"
                        >
@@ -73,7 +73,7 @@
                     </span>
                     <strong class="text-center p-2 mx-1" >{{item.quantity}}</strong>
                     <span class="input-group-btn">
-                      <button type="button" (click)="plus(item.quantity,item.product.id+'')"
+                      <button type="button" (click)="changeQuantity(item.quantity+1,item.product.id+'')"
                        class="quantity-right-plus btn btn-light btn-number" data-type="plus" data-field=""
                        [disabled]="item.quantity>= item.product.quantity"
                        >

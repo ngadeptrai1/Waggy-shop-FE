@@ -55,6 +55,17 @@ export class AuthService {
     return expirationDate > new Date();
   }
   
+  getJwtToken(): string | null {
+    const cookies = document.cookie.split(';');
+    for (const cookie of cookies) {
+      const [name, value] = cookie.split('=');
+      if (name.trim() === 'JWT_TOKEN') {
+        return decodeURIComponent(value);
+      }
+    }
+    return null;
+  }
+
   logout(): void {
     localStorage.removeItem(LocalStorage.token);
   }

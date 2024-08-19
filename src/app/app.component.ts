@@ -43,5 +43,6 @@ ngOnInit(): void {
     if(!this.authService.isLoggedIn()){
       this.authService.logout();
     }
+   
 }
 }

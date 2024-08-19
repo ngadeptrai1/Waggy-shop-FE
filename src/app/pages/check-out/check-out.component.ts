@@ -11,11 +11,12 @@ import { AuthService } from '../../services/auth.service';
 import { ThankYouComponent } from '../thank-you/thank-you.component';
 import { LoadingComponent } from '../../components/loading/loading.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-check-out',
   standalone: true,
-  imports: [ReactiveFormsModule,ModalComponent,RouterLink,ThankYouComponent,LoadingComponent],
+  imports: [ReactiveFormsModule,ModalComponent,RouterLink,ThankYouComponent,LoadingComponent,NgxSpinnerModule],
   templateUrl: './check-out.component.html',
   styleUrl: './check-out.component.scss'
 })
@@ -23,6 +24,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class CheckOutComponent implements OnInit {
   isSendOrder = false;
   isLoading = true;
+  isOrder = false;
   router= inject(Router);
   snackBar = inject(MatSnackBar);
   authService= inject(AuthService);
@@ -30,6 +32,7 @@ export class CheckOutComponent implements OnInit {
   productService = inject(ProductsService);
   orderService= inject(OrderService);
   orderDetails!:Order_detail[];
+  spinner = inject(NgxSpinnerService);
   private fb= inject(NonNullableFormBuilder);
   modalVisible: boolean = false;
   modalMessage: string = '';
@@ -88,18 +91,23 @@ ngOnInit(): void {
       code: '',
       order_details: orderDetails
     };
+    this.isLoading = true;
+    this.showSpin();
 this.createOrder(order);
   }
 
 createOrder(order:Order):void{
+  this.isOrder = true;
   this.orderService.createOrder(order).subscribe({
     next:(data)=> {
         console.log(data);
         this.isSendOrder = true;
+        this.isLoading = false;
+        this.showSpin();
     },
     error:(err)=> {
-        this.snackBar.open(err.error.messsage,"",{duration:2000})
-       
+      console.log(err);
+        this.snackBar.open("Some thing went wrong please try again ","",{duration:2000})
     },
     complete:()=> {
       this.cartService.clearCart();
@@ -115,6 +123,7 @@ createOrder(order:Order):void{
 
 loadCartItems():void{
   this.isLoading = true;
+  this.showSpin();
   const productIds = Object.keys(this.cart);
   if (productIds.length > 0) {
     this.productService.getProductsByIds(productIds).subscribe(products => {
@@ -125,6 +134,7 @@ loadCartItems():void{
       }));
     });
     this.isLoading = false;
+    this.showSpin();
   } else {
         this.isLoading = false
     this.cartItems = [];
@@ -139,7 +149,14 @@ getTotalPrice():number{
   return totalPrice;
   }
 
-  
+  private showSpin():void{
+    if(this.isLoading){
+      this.spinner.show();
+    }
+    else{
+      this.spinner.hide()
+    }
+  } 
 }
 
 
