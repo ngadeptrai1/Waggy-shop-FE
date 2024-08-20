@@ -23,15 +23,15 @@ export class AuthService {
     return this.service.post<ApiResponse<UserInterface>>(this.loginUrl,payload)
     .pipe(map((response)=>{
       if(response.token){
-        this.cookie.set("123",response.token);
+        this.cookie.set("token",response.token);
         // localStorage.setItem(LocalStorage.token,response.token);
       }
      return  response;
     }))
    }
    getToken(): string | null {
-    console.log(this.cookie.get("123"));
-    return this.cookie.get("123");
+    console.log(this.cookie.get("token"));
+    return this.cookie.get("token");
     
   }
 
@@ -59,7 +59,7 @@ export class AuthService {
   }
 
   logout(): void {
-    this.cookie.delete("123");
+    this.cookie.delete("token");
   }
 
 }
