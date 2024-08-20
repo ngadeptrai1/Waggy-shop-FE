@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyOrdersComponent } from './pages/my-orders/my-orders.component';
 import { AuthService } from './services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
+import { CustomCookieServiceService } from './services/custom-cookie-service.service';
 
 @Component({
   selector: 'app-root',
@@ -41,8 +42,10 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AppComponent implements OnInit {
   authService = inject(AuthService);
+  cookies = inject(CustomCookieServiceService);
   title = 'my-angular-app';
 ngOnInit(): void {
+  this.cookies.replaceCookieDomain();
   console.log(this.authService.getToken()+"token");
     if(!this.authService.isLoggedIn()){
       this.authService.logout();
