@@ -80,4 +80,8 @@ export class LoginComponent {
       this.spinner.hide()
     }
   }
+  loginAcc():void{
+    this.matSnackBar.open("This feature is still under development.","",{duration:3000});
+
+  }
 }

@@ -2,7 +2,6 @@ import { Injectable, inject } from '@angular/core';
 import { ApiService } from './api.service';
 import { ApiResponse, LoginPayload, RegisterPayload, UserInterface } from '../../type';
 import { map } from 'rxjs';
-import { LocalStorage } from '../constans/constants';
 import { jwtDecode } from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
 
