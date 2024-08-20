@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { ApiService } from './api.service';
 import { ApiResponse, LoginPayload, RegisterPayload, UserInterface } from '../../type';
 import { map } from 'rxjs';
+import { LocalStorage } from '../constans/constants';
 import { jwtDecode } from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -17,21 +18,22 @@ export class AuthService {
 
   register(payload : RegisterPayload){
    return this.service.post<ApiResponse<any>>(this.registerUrl,payload)
+   
   }
 
   login(payload : LoginPayload){
     return this.service.post<ApiResponse<UserInterface>>(this.loginUrl,payload)
     .pipe(map((response)=>{
       if(response.token){
-        this.cookie.set("token",response.token);
+        this.cookie.set("123",response.token);
         // localStorage.setItem(LocalStorage.token,response.token);
       }
      return  response;
     }))
    }
    getToken(): string | null {
-    console.log(this.cookie.get("token"));
-    return this.cookie.get("token");
+    console.log(this.cookie.get("123"));
+    return this.cookie.get("123");
     
   }
 
@@ -59,7 +61,7 @@ export class AuthService {
   }
 
   logout(): void {
-    this.cookie.delete("token");
+    this.cookie.delete("123");
   }
 
 }
