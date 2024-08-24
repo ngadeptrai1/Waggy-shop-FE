@@ -25,7 +25,7 @@ export class FilterComponent {
   categoryService:CategoryService;
   brands : Brand[] = [];
   categories: Category[] = [];
-  params:PaginationParams ={page:0,size:5,sort:'id',direction:'DESC'};
+  params:PaginationParams ={page:0,size:5,sort:'id',direction:'ASC'};
 
   constructor(brandService:BrandService,categoryService:CategoryService){
     this.brandService = brandService;
